@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Another test on For myself</title>
+    <link>https://shelmesky.github.io/tags/another-test/</link>
+    <description>Recent content in Another test on For myself</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh_CN</language>
+    <lastBuildDate>Mon, 21 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://shelmesky.github.io/tags/another-test/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Example article title</title>
+      <link>https://shelmesky.github.io/posts/my-first-post/</link>
+      <pubDate>Mon, 21 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://shelmesky.github.io/posts/my-first-post/</guid>
+      <description>集群的一致性级别：写入强一致性（也叫线性一致性），读取默认是最终一致性（可以改造为强一致性） 数据复制的方式：主从复制 分布式逻辑时钟: 多个分布</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Example article title - For myself</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="Example article description">
+		<meta property="og:title" content="Example article title" />
+<meta property="og:description" content="Example article description" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shelmesky.github.io/posts/my-first-post/" />
+<meta property="article:published_time" content="2017-08-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-08-21T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Example article title">
+<meta itemprop="description" content="Example article description">
+<meta itemprop="datePublished" content="2017-08-21T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-08-21T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2991">
+
+
+
+<meta itemprop="keywords" content="Test,Another test," />
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Example article title"/>
+<meta name="twitter:description" content="Example article description"/>
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Mainroad" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/placeholder.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Mainroad</div>
+					<div class="logo__tagline">Just another site</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Example article title</h1>
+			<p class="post__lead">Example lead - highlighted near the title</p>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">华子</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-08-21T00:00:00Z">2017-08-21</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/category-1/" rel="category">Category 1</a>, <a class="meta__link" href="/categories/category-2/" rel="category">Category 2</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/img/placeholder.jpg" alt="Example article title">
+		</figure>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#分布式逻辑时钟">分布式逻辑时钟:</a></li>
+        <li><a href="#一致性模块日志和状态机">一致性模块，日志和状态机:</a></li>
+        <li><a href="#配置变更">配置变更</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<p><strong>集群的一致性级别</strong>：写入强一致性（也叫线性一致性），读取默认是最终一致性（可以改造为强一致性）</p>
+<p><strong>数据复制的方式</strong>：主从复制</p>
+<h3 id="分布式逻辑时钟">分布式逻辑时钟:</h3>
+<p>多个分布式节点或进程需要协调达到共同认定一个标准时间，但是由于分布式场景中无法做到物理时间100%统一．需要一个逻辑时间戳证明事件发生的先后顺序，所以Raft协议运行过程中将时间分成了多个Term，一次Leader选举开启一个新的Term.</p>
+<p>如果一次选票被平均瓜分则Candidate增大Term再继续下一轮选举，所以Term是单调递增的．</p>
+<p>Leader需要持久化存储自己当前的Term（Current Term），当Leader宕机恢复后使用旧的Current Term向其他节点发送心跳请求，会被认为是过时的Term， 导致Leader变回Follower节点．</p>
+<p>非Leader节点理论上不需要持久化Current Term，因为它是从Leader发来的请求中获取最新的Term.（论文中说所有节点都要持久化Current Term).</p>
+<h3 id="一致性模块日志和状态机">一致性模块，日志和状态机:</h3>
+<p>一致性模块负责协调客户端发来的写入请求，并将数据作为日志复制到多个节点．一致性模块要保证复制是强一致性的，而且数据提交后永远存在．同时一致性模块还需要保证集群内新选举出的Leader拥有所有已经提交的数据．</p>
+<p>日志对应一条指令，指令的内容需要靠状态机来执行．</p>
+<p>状态机用来执行日志中的命令，这里的状态机没有具体定义．实际需要根据命令的内容做设计．例如日志中的命令是GET和SET指令，那么状态机就是接受这两个命令并执行的机器．</p>
+<p><strong>节点数量</strong>：不少于３个节点，允许**(n-1)/2**个宕机的节点，少于３个无法满足要求．
+一般推荐５个节点，５是大于３的奇数，宕机了２个节点依然可以正常工作．４个节点会出现Leader选举时投票被平均瓜分的情况．３个节点的集群宕机１个节点后，剩下２个节点无法满足(n-1)/2的结果．</p>
+<p><strong>节点功能分类</strong>：Follower，Candidate，Leader</p>
+<p><strong>Follower节点功能</strong>：</p>
+<ul>
+<li>接收client读取数据；</li>
+<li>处理leader发来的日志追加请求：第一阶段写入日志，第二阶段提交日志并应用到状态机；</li>
+<li>处理Candidate发来的投票请求（一个Term内只能给一个节点投一票，给Term一样或者日志Index大的投票）；</li>
+<li>收不到leader的心跳后变为Candidate节点（有个超时时间）；</li>
+</ul>
+<p><strong>Candidate节点功能</strong>：</p>
+<ul>
+<li>发送投票请求给其他节点，收到的投票数量达到<strong>n/2+1</strong>则变成leader节点；没有满足数量则随机超时后增大Term发起下一轮选举；</li>
+<li>收到其他leader发来包含新Term的心跳请求就变成Follower节点；</li>
+</ul>
+<p><strong>Leader节点功能：</strong></p>
+<p><strong>如何保证强一致性</strong>：</p>
+<p>Raft协议是一个分布式协议，它的最大特性写入数据时保持多个节点上的副本强一致性．它如何保证呢？抛开不涉及数据复制的</p>
+<p><strong>发生网络分区的情况如何处理：</strong></p>
+<p>发生网络分区时如果节点是奇数个，则必然会分化为多数派和少数派．如果leader被分在了少数派这边，那么leader会继续提供服务，客户端也可以继续向leader写入数据，但是数据写入后得不到多数派节点的确认，因此日志无法被提交．</p>
+<p>多数派这边的节点无法获得leader发来的心跳请求，则超时后进入选举流程．客户端可以向新选举出的leader提交写日志请求．</p>
+<p>如果客户端先在多数派的leader写入数据，再从少数派的leader中读取同样的数据，就会读到过期的数据，就产生了不一致性．</p>
+<p>少数派的leader上此时有客户端写入的数据，但是没有被提交．当网络分区恢复的时候，由于少数派的所有节点（包括leader）它们的term和index都已经落后与多数派，所以那些还没提交的数据会被来自多数派leader的数据覆盖．</p>
+<p>再说说选举，如果少数派的leader宕机了，它们之后选举时无法得到集群大部分节点的选票，就无法选出leader．所以在网络分区刚发生时，少数派的leader还可以提供读服务，如果它宕机以后，少数派无法选出新leader，读服务也无法提供．而多数派选出新leader后，即使新leader宕机，也可以继续发起下一轮选举，选出新的leader.</p>
+<p><strong>数据复制的流程：</strong></p>
+<ol>
+<li>Leader收到客户端的请求，将该条日志append到本地；</li>
+<li>Leader并行的向其他节点发起AppendEntries RPC调用；</li>
+<li>Leader收到大多数节点的RPC成功状态响应；</li>
+<li>Leader将在本地状态机上Apple该条日志；</li>
+<li>Leader响应客户端的请求；</li>
+<li>Leader通知Followers该条日志已经是Committed，Followers可以安全的Apple到本地状态机．</li>
+</ol>
+<p>通过上面的流程可以看出，Raft协议在写入客户端的数据时，保持了强一致性．但是没有使用2阶段提交，数据写入后Leader后，如果立刻在其他Follower中读取数据，由于Leader通知Follower日志可以提交的信息有快有慢，所以在读取数据的行为保持了最终一致性．</p>
+<p>如果Leader在<strong>第2步</strong>中向其他节点发起AE请求(AppendEntries)时其他节点未响应，则Leader会不停的重试．不论是Leader发送了AE请求Follower没收到，还是Follower收到之后还没来得及给Leader回应就崩溃，都可以进行无限的重拾．因为Raft内部需要保证每个请求是幂等性的，所以可以无限的重试请求．Raft内部使用Term和Log Index来唯一的标识一个日志项，重复的消息可以被忽略．</p>
+<p>还有一个比较重要的问题，在<strong>第3步</strong>完成之后，准备进行<strong>第4步</strong>操作，Leader还没来得及通知其他Follower日志已经提交的时候，Leader宕机了，虽然Leader本地已经标记日志为提交，并且应用到了Leader本地的状态机，但是其他Follower节点上日志还是未提交状态．这时发起一轮新的选举，新选出的Leader会和其他Follower进行日志的校验和匹配，发现都有之前一条未提交的日志，于是新的Leader继续提交之前的日志，之前的日志不会丢失．</p>
+<p>而站在客户端的角度来看，只有Leader没有响应自己的写请求，就可以一直重试．对于幂等性，可以由客户端实现，在一个循环中使用同一个消息不停的重试．但是这里应该有一个请求超时，即Leader无法向大部分节点写入日志时，应该在指定的时间内或者指定的次数返回，并向client报告集群不可用状态，避免client在集群故障时不停的重试而消耗资源．</p>
+<h3 id="配置变更">配置变更</h3>
+<p>所谓的配置变更包含两个单独的概念：配置和变更．配置是指加入或减少节点时，这些加入或减少的节点的信息，例如节点的IP地址和主机名等等．而另一个词变更，是指集群中的其他节点，需要知道这些新加入或减少的节点的信息．</p>
+<p>所以配置变更的过程和细节就非常重要，因为配置变更的过程中，如果一次加入两台或以上节点，而恰巧此时发生了网络分区，就会导致集群出现连个领导者的情况．</p>
+<p><img src=":/1ce5cffe8d5e422abc188aee114e1aac" alt="2020-04-19_06-02.png"></p>
+<p>如上图所示，刚开始集群中有３个节点：S1，S2和S3，接着添加２个节点：S4和S5．现在S3的配置经过变更知道了S4和S5的存在，而S1和S2并还没来得及更新配置，不知道集群中还有S4和S5的存在．如果发生了网络分区，例如S1和S2作为一个分区，S3和S4和S5作为一个网络分区，这两个分区中都能选出各自的Leader．</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/test/" rel="tag">Test</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/another-test/" rel="tag">Another test</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="华子 avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About 华子</span>
+	</div>
+	<div class="authorbox__description">
+		John Doe&rsquo;s true identity is unknown. Maybe he is a successful blogger or writer. Nobody knows it.
+	</div>
+</div>
+
+
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://shelmesky.github.io/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/my-first-post/">Example article title</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/another-test/" title="Another test">Another test</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/test/" title="Test">Test</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 华子.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
