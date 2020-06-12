@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on For myself</title>
-    <link>https://shelmesky.github.io/categories/</link>
+    <link>http://blog.rootk.com/categories/</link>
     <description>Recent content in Categories on For myself</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh_CN</language>
     <lastBuildDate>Mon, 21 Aug 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://shelmesky.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.rootk.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Category 1</title>
-      <link>https://shelmesky.github.io/categories/category-1/</link>
+      <link>http://blog.rootk.com/categories/category-1/</link>
       <pubDate>Mon, 21 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://shelmesky.github.io/categories/category-1/</guid>
+      <guid>http://blog.rootk.com/categories/category-1/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Category 2</title>
-      <link>https://shelmesky.github.io/categories/category-2/</link>
+      <link>http://blog.rootk.com/categories/category-2/</link>
       <pubDate>Mon, 21 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://shelmesky.github.io/categories/category-2/</guid>
+      <guid>http://blog.rootk.com/categories/category-2/</guid>
       <description></description>
     </item>
     
